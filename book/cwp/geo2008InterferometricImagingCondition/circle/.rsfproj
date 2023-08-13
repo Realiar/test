@@ -1,0 +1,3 @@
+uses=['sftransp', 'sfpad', 'sfwindow', 'sfput', 'sfadd', 'sfgraph', 'sfmath', 'sfgrey', 'sfdd', 'sfwdf', 'sfdip', 'sfpwd', 'sfseislet', 'sfcut']
+data=[]
+size=  113622106

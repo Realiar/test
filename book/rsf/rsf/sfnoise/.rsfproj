@@ -1,0 +1,3 @@
+uses=['sfmath', 'sfwindow', 'sfgraph', 'sfnoise', 'sfhistogram', 'sfdd', 'sfscale', 'sfbargraph']
+data=[]
+size=    2160000

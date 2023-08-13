@@ -1,0 +1,54 @@
+import os, sys
+
+try:
+    import bldutil
+    glob_build = True # scons command launched in RSFSRC
+    srcroot = '../..' # cwd is RSFSRC/build/user/luke
+    Import('env bindir libdir pkgdir')
+except:
+    glob_build = False # scons command launched in the local directory
+    srcroot = os.environ.get('RSFSRC', '../..')
+    sys.path.append(os.path.join(srcroot,'framework'))
+    import bldutil
+    # Allow user to link against already-compiled rsflib instead of
+    # building a new one in api/c (an action for which he may lack
+    # write permissions or simply time):
+    debug = ARGUMENTS.get('debug', 'y')
+    if debug == 'y':
+        env = bldutil.Debug() # Debugging flags for compilers
+    else:
+        env = Environment()
+        import configure
+        opts = configure.options(os.path.join(srcroot,'config.py'))
+        opts.Update(env)
+        # print env.Dump()
+    bindir = libdir = pkgdir = None
+
+targets = bldutil.UserSconsTargets()
+
+# C mains
+targets.c = '''
+dagap3  dagap3e  dagap3a dagapex angmig2 angmigM covariance2d divnp ovczop 
+dtw dtw-apply dtw-errors dtw-accumulate dtw-track dtw-flatten dtw2 dtw-interp
+translate convolve transconv lskernel pathmin pathmin-mov h2warp softclip normalize
+surface-consistent resamplextnd
+'''
+
+# F90 mains
+targets.f90 = '''
+
+'''
+
+# Python mains that do not need SWIG+numpy
+targets.py = '''
+varicost varipick variminim
+'''
+
+# scatterplot
+
+# Python modules that do not need SWIG+numpy
+targets.py_modules = '''
+varitools
+'''
+
+targets.build_all(env, glob_build, srcroot, bindir, libdir, pkgdir)

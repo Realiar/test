@@ -1,0 +1,28 @@
+from rsf.proj import *
+ 
+Flow('welcome',None,
+     'spike n1=1000 k1=300 | bandpass fhi=2 phase=1')
+
+# view=1: display on the screen without generating a figure
+Plot('welcome',
+     '''
+     matplotlib plot title="Welcome to Madagascar" 
+     grid=y linewidth=3 
+     ''',view=1) 
+ 
+Result('welcome',
+       '''
+       matplotlib plot title="Welcome to Madagascar欢迎" 
+       xlabel="Time (s)" ylabel=Amplitude
+       grid=y linewidth=3
+       ''')
+
+#Input: Matlab logo (L-shaped membrane)
+
+Fetch('matlab.rsf','imgs')
+
+Flow('logo','matlab.rsf','dd form=native | put o1=0 o2=0 d1=1 d2=1')
+
+Result('logo','matplotlib plot_surface title="Surface plot" cmap=jet')
+
+End()

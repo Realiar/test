@@ -1,0 +1,14 @@
+config.log
+config.py
+build
+env.sh
+.sconsign.dblite
+.sconsign
+env.csh
+.sconf_temp
+Makefile
+*.pyc
+*.rsf
+*.ltx
+*.vpl
+*.~
